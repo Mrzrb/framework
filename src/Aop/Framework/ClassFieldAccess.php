@@ -12,6 +12,7 @@ namespace Go\Aop\Framework;
 
 use Go\Aop\AspectException;
 use Go\Aop\Intercept\FieldAccess;
+use Go\Aop\Support\AnnotatedReflectionProperty;
 use ReflectionProperty;
 
 /**
@@ -66,7 +67,7 @@ class ClassFieldAccess extends AbstractJoinpoint implements FieldAccess
     {
         parent::__construct($advices);
 
-        $this->reflectionProperty = $reflectionProperty = new ReflectionProperty($className, $fieldName);
+        $this->reflectionProperty = $reflectionProperty = new AnnotatedReflectionProperty($className, $fieldName);
         // Give an access to protected field
         if ($reflectionProperty->isProtected()) {
             $reflectionProperty->setAccessible(true);
